@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+    position: relative;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+}
+.about{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    text-transform: none;
+    text-decoration: none;
+    color: #000;
+    font-size: 18px;
+}

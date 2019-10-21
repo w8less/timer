@@ -1,0 +1,21 @@
+<div class="container">
+    
+    <div class="timer-wrp">
+        <div class="timer">
+            <div>{{hh ? hh : '00'}}</div>
+            <div class="dd">:</div>
+            <div>{{(mm) && (mm <= 59) ? mm : '00'}}</div>
+            <div class="dd">:</div>
+            <div>{{(ss) && (ss <= 59) ? ss : '00'}}</div>        
+        </div>
+    
+        <div class="timer-btns">
+            <button (click)="start()">
+                <img src="../../assets/icons/pause-play-button.svg" alt="" title="start/stop">
+            </button>
+            <button (click)="wait()"><img src="../../assets/icons/hourglass.svg" alt="wait" title="wait"></button>
+            <button (click)="reset()"><img src="../../assets/icons/history-clock-button.svg" alt="" title="reset"></button>
+        </div>
+    </div>
+
+</div>
