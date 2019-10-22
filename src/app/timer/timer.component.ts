@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { TimerService } from '../shared/services/timer.service';
 import { Subject, Subscription, timer } from 'rxjs';
-import { scan, map, takeUntil, share } from 'rxjs/operators';
+import { scan, map, takeUntil, share, debounce, debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-timer',
@@ -16,17 +16,17 @@ export class TimerComponent {
   ss : any;
   mm : any;
   hh : any;
-  flag: boolean = false;
-  isSingle : boolean = true;
+  isClick: boolean = false;
+  isSingleClick : boolean = true;
   stop$ : Subject<any> = new Subject();
   checkTimeout : any;
 
   start() {
-    if (!this.flag) {
-      this.flag = !this.flag;
+    if (!this.isClick) {
+      this.isClick = !this.isClick;
       let second: Subscription = timer(0,1000)
         .pipe(
-          scan((acc, curr) => (curr ? curr  : curr + acc ), this.counter),
+          scan((acc, curr) => (curr ? curr : curr + acc ), this.counter),
           map(() => this.counter++),
           takeUntil(this.stop$),
           share(),
@@ -40,23 +40,23 @@ export class TimerComponent {
         );
     }
     else {
-      this.flag = !this.flag;
+      this.isClick = !this.isClick;
       this.stop$.next(false)
     }
   }
 
   wait() {
-    if (this.isSingle){
-      this.flag = !this.flag;
-      this.isSingle = !this.isSingle;
+    if (this.isSingleClick){
+      this.isClick = !this.isClick;
+      this.isSingleClick = !this.isSingleClick;
       this.checkTimeout = setTimeout(() => {
-        this.flag = !this.flag;
-        this.isSingle = !this.isSingle;
+        this.isClick = !this.isClick;
+        this.isSingleClick = !this.isSingleClick;
       }, 300);
     }
     else {
-      this.isSingle = !this.isSingle
-      this.flag = !this.flag;
+      this.isSingleClick = !this.isSingleClick
+      this.isClick = !this.isClick;
       this.stop$.next(false)
       this.checkTimeout = clearTimeout();
     }
